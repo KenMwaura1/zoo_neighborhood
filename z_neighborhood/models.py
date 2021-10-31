@@ -163,3 +163,39 @@ class Post(models.Model):
     def delete_post(self):
         self.delete()
 
+
+class Business(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField(max_length=254)
+    description = models.TextField(blank=True)
+    neighbourhood = models.ForeignKey(NeighborHood, on_delete=models.CASCADE, related_name='business')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='owner')
+    business_logo = CloudinaryField('image')
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
+
+    @classmethod
+    def get_business_by_id(cls, id):
+        return cls.objects.filter(id=id)
+
+    @classmethod
+    def get_business_by_name(cls, name):
+        return cls.objects.filter(name=name)
+
+    @classmethod
+    def get_business_by_email(cls, email):
+        return cls.objects.filter(email=email)
+
+    def __str__(self):
+        return f'{self.name} Business'
+
+
+
