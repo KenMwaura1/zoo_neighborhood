@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+
+import cloudinary
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'z_neighborhood.apps.ZNeighborhoodConfig',
     'bootstrap5',
     'crispy_forms',
+    'cloudinary',
 
 ]
 
@@ -142,6 +145,13 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
