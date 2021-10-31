@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from z_neighborhood.models import NeighborHood
+from z_neighborhood.models import NeighborHood, UserProfile
 
 
 class RegisterForm(UserCreationForm):
@@ -39,6 +39,16 @@ class NeighbourHoodForm(forms.ModelForm):
             'health': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Health'}),
             'education': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Education'}),
             'hood_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Image'}),
+        }
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ('user', 'neighbourhood')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Bio'}),
+            'profile_pic': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Profile Picture'}),
         }
 
 
