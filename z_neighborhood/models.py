@@ -123,4 +123,43 @@ class UserProfile(models.Model):
         return cls.objects.filter(date_joined=date_joined)
 
 
+class Post(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    post = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='post_owner')
+    hood = models.ForeignKey(NeighborHood, on_delete=models.CASCADE, related_name='post_hood')
+
+    def __str__(self):
+        return self.title
+
+    def save_post(self):
+        self.save()
+
+    @classmethod
+    def get_post_by_id(cls, id):
+        return cls.objects.filter(id=id)
+
+    @classmethod
+    def get_post_by_user(cls, user):
+        return cls.objects.filter(user=user)
+
+    @classmethod
+    def get_post_by_hood(cls, hood):
+        return cls.objects.filter(hood=hood)
+
+    @classmethod
+    def get_post_by_title(cls, title):
+        return cls.objects.filter(title=title)
+
+    @classmethod
+    def get_post_by_post(cls, post):
+        return cls.objects.filter(post=post)
+
+    @classmethod
+    def get_post_by_date(cls, date):
+        return cls.objects.filter(date=date)
+
+    def delete_post(self):
+        self.delete()
 
