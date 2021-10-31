@@ -26,3 +26,19 @@ class LoginForm(ModelForm):
         }
 
 
+class NeighbourHoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighborHood
+        exclude = ('admin',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Name'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Location'}),
+            'population': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Population'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'police': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Police'}),
+            'health': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Health'}),
+            'education': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Education'}),
+            'hood_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Image'}),
+        }
+
+
