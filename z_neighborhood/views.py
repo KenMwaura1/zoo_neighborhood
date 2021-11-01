@@ -13,6 +13,7 @@ def home(request):
 
 def neighborhood(request):
     all_neighborhoods = NeighborHood.get_all_neighborhoods()
+    print(all_neighborhoods)
     return render(request, 'z_neighborhood/neighborhood.html', {'all_neighborhoods': all_neighborhoods})
 
 
@@ -72,4 +73,12 @@ def profile(request):
 
 
 def search_business(request):
+    return None
+
+
+def join_hood(request):
+    return None
+
+
+def leave_hood(request):
     return None
