@@ -15,10 +15,14 @@
                         <a href="{% url 'hood_details' hood.id  %}" > <img src="{{ hood.hood_logo.url }}" class="card-img-top" alt="{{ hood.name }}"> </a>
                         <div class="card-body">
                             <h5 class="card-title h5">{{ hood.name| title }}  ({{hood.location}})
-                                <br>
+
                                 <a href="{%  url 'members' hood.id %}"> <span class="ml-4 text-center  badge badge-pill badge-success">{{hood.members.count}} member{{hood.members.count|pluralize}}</span> </a>
+                                <a href="{%  url 'business' hood.id %}"> <span class="ml-4 text-center  badge badge-pill badge-info">{{hood.business.count}} Business{{hood.business.count|pluralize}}</span> </a>
                             </h5>
-                            <p class="card-text black-text">{{hood.description}}</p>
+                            <h5 class="card-title h5">
+
+                            </h5>
+                            <p class="card-text black-text text-capitalize">{{hood.description}}</p>
                             {% if request.user.userprofile.neighbourhood == hood %}
                                 <a href="{% url 'leave-hood' hood.id %}" class="btn rounded-pill btn-reddit btn-sm">Leave Hood</a>
                             {% elif not request.user.userprofile.neighbourhood %}
