@@ -32,7 +32,7 @@
                         <div class="dropdown-menu dropdown-success " aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
                             <hr>
-                            <a class="dropdown-item text-center" href="#"> Edit profile</a>
+                            <a class="dropdown-item text-center" href="{% url 'edit_profile' user.username %}"> Edit profile</a>
                             <hr>
                             <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
 
