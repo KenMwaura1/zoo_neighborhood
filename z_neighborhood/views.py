@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import RegisterForm, NeighborHoodForm, BusinessForm, PostForm
 from .models import NeighborHood, Business, Post, UserProfile
@@ -94,17 +94,12 @@ def create_post(request, hood_id):
     return render(request, 'z_neighborhood/create_post.html', params)
 
 
-def profile(request):
-    return None
+def profile(request, username):
+    return render(request, 'z_neighborhood/profile.html')
 
 
 def search_business(request):
     return None
 
 
-def join_hood(request):
-    return None
 
-
-def leave_hood(request):
-    return None

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container " style="margin-top: 10%">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 mt-4 bg-white prof mr-2 ml-2 zoom">
+                <img class="rounded-circle account-img d-block mx-auto img-thumbnail" src="{{ user.userprofile.profile_pic.url }}"
+                     height="125px" width="125px" alt="">
+                <h5 class="text-center mt-3">{{user.username}}</h5>
+                <p class="text-center"> {{user.email}}</p>
+                {% if request.user.profile.neighbourhood %}
+                    <p class="text-center">My Hood
+                        <a class="btn btn-sm rounded-pill btn-light-blue" href="{% url 'hood-details' user.userprofile.neighbourhood.id %}">{{ user.userprofile.neighbourhood.name }}</a>
+                    </p>
+                {% endif %}
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+    </div>
+{% endblock %}
