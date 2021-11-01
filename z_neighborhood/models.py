@@ -164,6 +164,12 @@ class Post(models.Model):
     def delete_post(self):
         self.delete()
 
+    @classmethod
+    def get_posts_by_neighbourhood(cls, hood):
+        hood_posts = cls.objects.filter(hood=hood)
+        return hood_posts[::-1]
+
+
 
 class Business(models.Model):
     name = models.CharField(max_length=120)
@@ -190,6 +196,10 @@ class Business(models.Model):
     @classmethod
     def get_business_by_name(cls, name):
         return cls.objects.filter(name=name)
+
+    @classmethod
+    def get_business_by_neighbourhood(cls, neighbourhood):
+        return cls.objects.filter(neighbourhood=neighbourhood)
 
     @classmethod
     def get_business_by_email(cls, email):

@@ -2,9 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-
-from .forms import RegisterForm, NeighborHoodForm
-from .models import NeighborHood
+from .forms import RegisterForm, NeighborHoodForm, BusinessForm
+from .models import NeighborHood, Business, Post
 
 
 @login_required(login_url='/login/')
@@ -31,6 +30,7 @@ def register(request):
         form = RegisterForm()
     return render(request, 'django_registration/registration_form.html', {'form': form})
 
+
 def add_hood(request):
     if request.method == "POST":
         form = NeighborHoodForm(request.POST)
@@ -46,7 +46,26 @@ def add_hood(request):
 
 def hood_details(request, hood_id):
     hood = NeighborHood.find_neighborhood(hood_id)
-    return render(request, 'z_neighborhood/hood_details.html', {'hood': hood})
+    business = Business.get_business_by_neighbourhood(hood)
+    posts = Post.get_posts_by_neighbourhood(hood)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            biz_form = form.save(commit=False)
+            biz_form.neighborhood = hood
+            biz_form.user = request.user.userprofile
+            biz_form.save()
+            return redirect('home')
+    else:
+        form = BusinessForm()
+    params = {
+        'hood': hood,
+        'business': business,
+        'posts': posts,
+        'form': form
+    }
+    return render(request, 'z_neighborhood/hood_details.html', params)
+
 
 def profile(request):
     return None
