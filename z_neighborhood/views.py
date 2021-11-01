@@ -112,7 +112,18 @@ def edit_profile(request, username):
 
 
 def search_business(request):
-    return None
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_business = Business.search_business(search_term)
+        message = f"{search_term}"
+        params = {
+            'message': message,
+            'businesses': searched_business
+        }
+        return render(request, 'z_neighborhood/search.html', params)
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'z_neighborhood/search.html', {'message': message})
 
 
 def join_hood(request, id):
