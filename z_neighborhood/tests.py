@@ -139,6 +139,45 @@ class BusinessTestCase(TestCase):
         self.assertEqual(self.business.user, self.profile)
 
 
+class PostTestCase(TestCase):
+    def setUp(self):
+        self.user = User(username='zoo', password='testpwsd123')
+        self.user.save()
+        self.profile = UserProfile(id=17, user=self.user, )
+        self.neighborhood = NeighborHood(name='Test Neighborhood', location='Test Location', population=0,
+                                         description='Test Description', hood_logo='Test Image',
+                                         police=254, health=254, education=254, )
+        self.neighborhood.save()
+        self.post = Post(title='Test Post', post='Test Content', user=self.profile, hood=self.neighborhood, )
+        self.post.save()
+
+    def tearDown(self):
+        User.objects.all().delete()
+        UserProfile.objects.all().delete()
+        Post.objects.all().delete()
+        self.user.delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.post, Post))
+
+    def test_save_post(self):
+        self.post.save()
+
+    def test_delete_post(self):
+        self.post.save()
+
+    def test_post_title(self):
+        self.assertEqual(self.post.title, 'Test Post')
+
+    def test_post_content(self):
+        self.assertEqual(self.post.post, 'Test Content')
+
+    def test_post_user(self):
+        self.assertEqual(self.post.user, self.profile)
+
+    def test_post_hood(self):
+        self.assertEqual(self.post.hood, self.neighborhood)
+
 
 
 
