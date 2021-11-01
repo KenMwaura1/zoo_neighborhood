@@ -179,6 +179,86 @@ class PostTestCase(TestCase):
         self.assertEqual(self.post.hood, self.neighborhood)
 
 
+class ProfileTestCase(TestCase):
+    def setUp(self):
+        self.user = User(username='zoo', password='testpwsd123')
+        self.user.save()
+        self.profile = UserProfile(id=17, user=self.user, )
+        self.profile_pic = "https://res.cloudinary.com/dd5ab8mp3/image/upload/v1634660213/image/upload/v1/images/profile/user.jpg"
+        self.bio = "default bio"
+        self.neighborhood = NeighborHood(name='Test Neighborhood', location='Test Location', population=0,
+                                         description='Test Description', hood_logo='Test Image',
+                                         police=254, health=254, education=254, )
+        self.neighborhood.save()
+
+    def tearDown(self):
+        User.objects.all().delete()
+        UserProfile.objects.all().delete()
+        NeighborHood.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.profile, UserProfile))
+
+    def test_save_profile(self):
+        self.profile.create_profile()
+        after = UserProfile.objects.all()
+        self.assertTrue(len(after) > 0)
+
+    def test_delete_profile(self):
+        self.profile.create_profile()
+        self.user.delete()
+        after = UserProfile.objects.all()
+        self.assertTrue(len(after) == 0)
+
+    def test_profile_user(self):
+        self.assertEqual(self.profile.user, self.user)
+
+    def test_profile_neighborhood(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood, self.neighborhood)
+
+    def test_profile_image(self):
+        self.assertEqual(self.profile.profile_pic, self.profile_pic)
+
+    def test_profile_bio(self):
+        self.assertEqual(self.profile.bio, self.bio)
+
+    def test_profile_hood(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood, self.neighborhood)
+
+    def test_profile_hood_name(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.name, self.neighborhood.name)
+
+    def test_profile_hood_location(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.location, self.neighborhood.location)
+
+    def test_profile_hood_population(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.population, self.neighborhood.population)
+
+    def test_profile_hood_description(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.description, self.neighborhood.description)
+
+    def test_profile_hood_logo(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.hood_logo, self.neighborhood.hood_logo)
+
+    def test_profile_hood_police(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.police, self.neighborhood.police)
+
+    def test_profile_hood_health(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.health, self.neighborhood.health)
+
+    def test_profile_hood_education(self):
+        self.profile.neighbourhood = self.neighborhood
+        self.assertEqual(self.profile.neighbourhood.education, self.neighborhood.education)
+
 
 
 
