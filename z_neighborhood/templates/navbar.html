@@ -1,0 +1,76 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar white aqua-gradient" style="margin-bottom: 5%">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold white-text" href="{% url 'home' %}">Zoo NeighborHood</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="list-unstyled navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link white-text" href="{% url 'home' %}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link white-text" href="#proj">Projects
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- Social Icon  -->
+            <ul class="navbar-nav nav-flex-icons">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown h5 zoom">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"> <i class="fas fa-award dark-grey-text"></i>{{ user.username|title }}
+                            <img class="rounded-circle nav-img  img-thumbnail " src="{{ user.userprofile.profile_pic.url }}" alt="" height="50" width="50">
+                        </a>
+                        <div class="dropdown-menu dropdown-success " aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
+                            <hr>
+                            <a class="dropdown-item text-center" href="#"> Edit profile</a>
+                            <hr>
+                            <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+
+
+                        </div>
+                    </li>
+                <li class="nav-item ml-3">
+                    <form class="form-inline my-2 my-md-0"  action="{% url 'search' %}" role="search">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for user projects" name="q" aria-label="Search">
+                        <button class="btn pink-gradient btn-rounded btn-sm font-weight-bold" type="submit" data-offset="90">Search</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item ml-3">
+                    <a class="btn pink-gradient btn-rounded btn-sm font-weight-bold" href="/accounts/login/" data-offset="90">Login</a>
+                    <a class="btn peach-gradient btn-rounded btn-sm font-weight-bold" href="/accounts/register/" data-offset="90">Sign Up</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <button class="btn  btn-sm purple-gradient btn-rounded" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+                        Submit your site
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fab fa-facebook-f title"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fab fa-twitter title"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
