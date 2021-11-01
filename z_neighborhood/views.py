@@ -47,9 +47,9 @@ def add_hood(request):
 
 
 def hood_details(request, hood_id):
-    hood = NeighborHood.find_neighborhood(hood_id)
-    business = Business.get_business_by_neighbourhood(hood)
-    posts = Post.get_posts_by_neighbourhood(hood)
+    hood = NeighborHood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=hood)
+    posts = Post.objects.filter(hood=hood)
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
@@ -102,7 +102,7 @@ def profile(request, username):
 def edit_profile(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
         if form.is_valid():
             form.save()
             return redirect('profile', user.username)
@@ -138,3 +138,8 @@ def leave_hood(request, id):
     request.user.userprofile.neighbourhood = None
     request.user.userprofile.save()
     return redirect('neighborhood')
+
+
+def hood_business(request, neighborhood_id):
+    businesses = Business.objects.filter(neighbourhood=neighborhood_id)
+    return render(request, 'z_neighborhood/hood_business.html', {'businesses': businesses})
