@@ -1,1 +1,1 @@
-web: gunicorn z_neighborhood.wsgi
+web: gunicorn zoo_neighborhood.wsgi
