@@ -14,7 +14,7 @@ class NeighborHood(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     population = models.IntegerField()
-    admin = models.ForeignKey("UserProfile", on_delete=models.CASCADE, related_name='hood', default=None)
+    admin = models.ForeignKey("UserProfile", on_delete=models.CASCADE, related_name='hood', default=None, null=True)
     hood_logo = CloudinaryField('image')
     description = models.TextField()
     police = models.IntegerField()
@@ -94,7 +94,8 @@ class UserProfile(models.Model):
         return f'{self.user.username}: profile'
 
     def create_profile(self):
-        self.save()
+        # self.save()
+        pass
 
     def delete_profile(self):
         self.delete()
@@ -170,7 +171,6 @@ class Post(models.Model):
         return hood_posts[::-1]
 
 
-
 class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
@@ -199,7 +199,7 @@ class Business(models.Model):
 
     @classmethod
     def get_business_by_neighbourhood(cls, neighbourhood):
-        return cls.objects.filter(neighbourhood=neighbourhood)
+        return cls.objects.filter(neighbourhood_id=neighbourhood).all()
 
     @classmethod
     def get_business_by_email(cls, email):
@@ -207,6 +207,3 @@ class Business(models.Model):
 
     def __str__(self):
         return f'{self.name} Business'
-
-
-
