@@ -84,6 +84,60 @@ class NeighborhoodTestCase(TestCase):
         self.assertEqual(self.neighborhood.health, 254)
 
 
+class BusinessTestCase(TestCase):
+    def setUp(self):
+        self.user = User(username='zoo', password='testpwsd123')
+        self.user.save()
+        self.profile = UserProfile(id=17, user=self.user, )
+        # self.profile.save()
+        self.neighborhood = NeighborHood(name='Test Neighborhood', location='Test Location', population=0,
+                                         description='Test Description', hood_logo='Test Image',
+                                         police=254, health=254, education=254, )
+        self.neighborhood.save()
+        self.business = Business(name='Test Business', email="zootest@test.com", description='Test Description',
+                                 neighbourhood=self.neighborhood,
+                                 business_logo='Test Image', user=self.profile, )
+        self.business.save()
+
+    def tearDown(self):
+        User.objects.all().delete()
+        UserProfile.objects.all().delete()
+        NeighborHood.objects.all().delete()
+        Business.objects.all().delete()
+        self.user.delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.business, Business))
+
+    def test_save_business(self):
+        self.business.save()
+        after = Business.objects.all()
+        self.assertTrue(len(after) > 0)
+
+    def test_delete_business(self):
+        self.business.save()
+        self.business.delete()
+        after = Business.objects.all()
+        self.assertTrue(len(after) == 0)
+
+    def test_business_name(self):
+        self.assertEqual(self.business.name, 'Test Business')
+
+    def test_business_email(self):
+        self.assertEqual(self.business.email, 'zootest@test.com')
+
+    def test_business_description(self):
+        self.assertEqual(self.business.description, 'Test Description')
+
+    def test_business_logo(self):
+        self.assertEqual(self.business.business_logo, 'Test Image')
+
+    def test_business_neighborhood(self):
+        self.assertEqual(self.business.neighbourhood, self.neighborhood)
+
+    def test_business_user(self):
+        self.assertEqual(self.business.user, self.profile)
+
 
 
 
