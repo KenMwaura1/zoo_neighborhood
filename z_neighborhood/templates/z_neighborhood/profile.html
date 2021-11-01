@@ -8,7 +8,7 @@
             <div class="zoom view view-cascade ripe-malinka-gradient waves-effect" style="padding: 5% ">
                 <img class="rounded-circle account-img d-block mx-auto img-thumbnail" src="{{ user.userprofile.profile_pic.url }}"
                      alt="Card image cap" height="125px" width="125px" style="margin-top: 4%">
-                <h5 class="text-center mt-3 h3">{{user.username | title}}</h5>
+                <h5 class="text-center mt-3 h3">{{user.userprofile.username | title}}</h5>
                 <p class="text-center h5"> {{user.email}}</p>
                 <div class="card-block">
                     <p class="card-text text-center">{{ user.userprofile.bio }}</p>
@@ -16,7 +16,7 @@
                 </div>
                 {% if request.user.userprofile.neighbourhood %}
                     <p class="text-center">My Hood
-                        <a class="btn btn-sm rounded-pill btn-light-blue" href="{% url 'hood-details' user.userprofile.neighbourhood.id %}">{{ user.userprofile.neighbourhood.name }}</a>
+                        <a class="btn btn-sm rounded-pill btn-light-blue" href="{% url 'hood_details' user.userprofile.neighbourhood.id %}">{{ user.userprofile.neighbourhood.name }}</a>
                     </p>
                 {% endif %}
             </div>
