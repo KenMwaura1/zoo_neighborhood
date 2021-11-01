@@ -36,7 +36,7 @@ class NeighborHoodForm(forms.ModelForm):
             'population': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Population'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
             'police': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Police'}),
-            'hood_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Image'}),
+            'hood_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Logo'}),
             'health': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Health'}),
             'education': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Education'}),
 

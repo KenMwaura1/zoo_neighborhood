@@ -37,7 +37,7 @@ def register(request):
 @login_required(login_url='/accounts/login/')
 def add_hood(request):
     if request.method == "POST":
-        form = NeighborHoodForm(request.POST)
+        form = NeighborHoodForm(request.POST, request.FILES)
         if form.is_valid():
             hood = form.save(commit=False)
             hood.admin = request.user.userprofile
