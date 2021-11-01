@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import RegisterForm, NeighborHoodForm, BusinessForm, PostForm
+from .forms import RegisterForm, NeighborHoodForm, BusinessForm, PostForm, UpdateProfileForm
 from .models import NeighborHood, Business, Post, UserProfile
 
 
@@ -96,6 +97,18 @@ def create_post(request, hood_id):
 
 def profile(request, username):
     return render(request, 'z_neighborhood/profile.html')
+
+
+def edit_profile(request, username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', user.username)
+    else:
+        form = UpdateProfileForm(instance=request.user.userprofile)
+    return render(request, 'z_neighborhood/edit_profile.html', {'form': form})
 
 
 def search_business(request):
