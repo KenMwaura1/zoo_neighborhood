@@ -102,4 +102,15 @@ def search_business(request):
     return None
 
 
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(NeighborHood, id=id)
+    request.user.userprofile.neighbourhood = neighbourhood
+    request.user.userprofile.save()
+    return redirect('neighborhood')
 
+
+def leave_hood(request, id):
+    hood = get_object_or_404(NeighborHood, id=id)
+    request.user.userprofile.neighbourhood = None
+    request.user.userprofile.save()
+    return redirect('neighborhood')
