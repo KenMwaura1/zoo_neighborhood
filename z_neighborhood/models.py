@@ -175,7 +175,7 @@ class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
     description = models.TextField(blank=True)
-    neighbourhood = models.ForeignKey(NeighborHood, on_delete=models.CASCADE, related_name='business')
+    neighbourhood = models.ForeignKey(NeighborHood, on_delete=models.CASCADE, related_name='business', null=True)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='owner')
     business_logo = CloudinaryField('image')
 

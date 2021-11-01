@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
+{% load static %}
+
 {% block content %}
 
     <div class="container" style="margin-top:10%">
@@ -93,7 +96,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="post">
+                                    <form action="" method="post" enctype="multipart/form-data" novalidate>
                                         {% csrf_token%}
                                         {{form|crispy}}
                                         <button type="submit" class="btn btn-sm btn-cyan rounded-pill">Save Business</button>

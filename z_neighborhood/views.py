@@ -54,10 +54,10 @@ def hood_details(request, hood_id):
     business = Business.objects.filter(neighbourhood=hood)
     posts = Post.objects.filter(hood=hood)
     if request.method == 'POST':
-        form = BusinessForm(request.POST)
+        form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             biz_form = form.save(commit=False)
-            biz_form.neighborhood = hood
+            biz_form.neighbourhood = hood
             biz_form.user = request.user.userprofile
             biz_form.save()
             return redirect('home')
@@ -89,7 +89,7 @@ def create_post(request, hood_id):
             post.hood = hood
             post.user = request.user.userprofile
             post.save()
-            return redirect('single-hood', hood.id)
+            return redirect('hood_details', hood.id)
     else:
         form = PostForm()
     params = {
