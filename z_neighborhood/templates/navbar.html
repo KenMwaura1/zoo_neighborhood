@@ -42,7 +42,7 @@
                 <li class="nav-item ml-3">
                     <form class="form-inline my-2 my-md-0"  action="{% url 'search' %}" role="search">
                         {% csrf_token %}
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search for user projects" name="q" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for businesses" name="business" aria-label="Search">
                         <button class="btn pink-gradient btn-rounded btn-sm font-weight-bold" type="submit" data-offset="90">Search</button>
                     </form>
                 </li>
@@ -52,11 +52,6 @@
                     <a class="btn peach-gradient btn-rounded btn-sm font-weight-bold" href="/accounts/register/" data-offset="90">Sign Up</a>
                 </li>
                 {% endif %}
-                <li class="nav-item">
-                    <button class="btn  btn-sm purple-gradient btn-rounded" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
-                        Submit your site
-                    </button>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fab fa-facebook-f title"></i>
