@@ -1,43 +1,32 @@
 {%  extends "base.html" %}
 {% load static %}
 {% block title %}
-    {% if neighborhood %}
-        {{ neighborhood.name }}
-    {% else %}
-        Neighborhood
-    {% endif %}
-{% endblock %}
-{% block content %}
-    <div class="container" style="margin-top: 10%">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>
-                    {% if neighborhood %}
-                        {{ neighborhood.name }}
-                    {% else %}
-                        Neighborhood
-                    {% endif %}
-                </h1>
+        {% if neighborhood %}
+            {{ neighborhood.name }}
+        {% else %}
+            Neighborhood
+        {% endif %}
+    {% endblock %}
+    {% block content %}
+        <div class="container" style="margin-top: 10%">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>
+                        {% if neighborhood %}
+                            {{ neighborhood.name }}
+                        {% else %}
+
+                        {% endif %}
+                    </h1>
+                </div>
             </div>
         </div>
+    <div class="container" style="margin-bottom: 30% ">
         <div class="row">
             <div class="col-md-12">
+                <h1 class="h2 testimonial-card">Welcome to Zoo NeighbourHood </h1>
                 <p>
-                    {% if neighborhood %}
-                        {{ neighborhood.description }}
-                    {% else %}
-                        Neighborhood description
-                    {% endif %}
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Welcome to the Neighborhood</h1>
-                <p>
-                    This is the home page for the Neighborhood.
+                    <a href="{% url 'neighborhood' %}" class="btn btn-sm purple-gradient mt-4 rounded-pill">Join a Hood</a>
                 </p>
             </div>
         </div>
