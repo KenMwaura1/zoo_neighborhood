@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 
-from .forms import RegisterForm
+from .forms import RegisterForm, NeighborHoodForm
 from .models import NeighborHood
 
 
@@ -31,8 +31,26 @@ def register(request):
         form = RegisterForm()
     return render(request, 'django_registration/registration_form.html', {'form': form})
 
+def add_hood(request):
+    if request.method == "POST":
+        form = NeighborHoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.userprofile
+            hood.save()
+            return redirect('home')
+    else:
+        form = NeighborHoodForm()
+    return render(request, 'z_neighborhood/add_hood.html', {'form': form})
 
 
+def hood_details(request, hood_id):
+    hood = NeighborHood.find_neighborhood(hood_id)
+    return render(request, 'z_neighborhood/hood_details.html', {'hood': hood})
 
 def profile(request):
+    return None
+
+
+def search_business(request):
     return None
