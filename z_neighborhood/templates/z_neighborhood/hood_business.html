@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="margin-top: 10%">
         <div class="row">
             <div class="col-md-12">
                 <h1>{{ title }}</h1>
@@ -34,13 +34,25 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+            {% if businesses %}
                 <ul>
                     {% for business in businesses %}
-                        <li>
-                            <a href="{{ business.get_absolute_url }}">{{ business.name }}</a>
-                        </li>
+                        <div class="col-md-4 card card-cascade   waves-effect">
+                            <div class="card mb-4 view view-cascade" style="margin-top: 5%">
+                                <div class="card-body">
+                                    <h5 class="card-title h5 black-text">{{business.name| title}}
+                                    </h5>
+                                    <p class="card-text">{{business.email}}</p>
+                                    <p class="card-text">{{business.description}}</p>
+                                    <p class="card-text h4">Owner: <small class="text-muted h6 black-text">
+                                        {{ business.user.user.username|title }}</small></p>
+                                </div>
+                        </div>
                     {% endfor %}
                 </ul>
+            {% else %}
+                <p>No businesses found.</p>
+            {% endif %}
             </div>
         </div>
     </div>
