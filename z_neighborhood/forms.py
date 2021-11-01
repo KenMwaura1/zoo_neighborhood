@@ -82,3 +82,14 @@ class BusinessForm(forms.ModelForm):
         }
 
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'hood')
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Post Title'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Post Content'}),
+            'post_image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Post Image'}),
+        }
+
+
