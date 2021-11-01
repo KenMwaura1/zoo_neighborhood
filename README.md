@@ -9,7 +9,7 @@ A Django web application that allows you to be in the loop about everything happ
 
 ## Live Site
 
-[link to deployed site]()
+[link to deployed site](https://zoo-neighborhood.herokuapp.com/)
 
 ## Setup Instructions / Installation
 
