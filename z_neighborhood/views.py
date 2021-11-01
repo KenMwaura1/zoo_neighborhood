@@ -151,4 +151,5 @@ def leave_hood(request, id):
 @login_required(login_url='/accounts/login/')
 def hood_business(request, neighborhood_id):
     businesses = Business.objects.filter(neighbourhood=neighborhood_id)
-    return render(request, 'z_neighborhood/hood_business.html', {'businesses': businesses})
+    hood = get_object_or_404(NeighborHood, id=neighborhood_id)
+    return render(request, 'z_neighborhood/hood_business.html', {'businesses': businesses, 'hood': hood})
