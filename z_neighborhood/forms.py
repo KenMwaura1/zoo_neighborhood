@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from z_neighborhood.models import NeighborHood, UserProfile
+from .models import NeighborHood, UserProfile, Business, Post
 
 
 class RegisterForm(UserCreationForm):
@@ -49,6 +49,22 @@ class UpdateProfileForm(forms.ModelForm):
         widgets = {
             'bio': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Bio'}),
             'profile_pic': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Profile Picture'}),
+        }
+
+
+class UpdateNeighbourhoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighborHood
+        exclude = ('admin',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Name'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Location'}),
+            'population': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Population'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'police': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Police'}),
+            'health': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Health'}),
+            'education': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Education'}),
+            'hood_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Neighborhood Image'}),
         }
 
 
