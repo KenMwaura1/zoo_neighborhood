@@ -7,11 +7,12 @@ from .forms import RegisterForm, NeighborHoodForm, BusinessForm, PostForm, Updat
 from .models import NeighborHood, Business, Post, UserProfile
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def home(request):
     return render(request, 'z_neighborhood/home.html')
 
 
+@login_required(login_url='/accounts/login/')
 def neighborhood(request):
     all_neighborhoods = NeighborHood.get_all_neighborhoods()
     print(all_neighborhoods)
@@ -33,6 +34,7 @@ def register(request):
     return render(request, 'django_registration/registration_form.html', {'form': form})
 
 
+@login_required(login_url='/accounts/login/')
 def add_hood(request):
     if request.method == "POST":
         form = NeighborHoodForm(request.POST)
@@ -46,6 +48,7 @@ def add_hood(request):
     return render(request, 'z_neighborhood/add_hood.html', {'form': form})
 
 
+@login_required(login_url='/accounts/login/')
 def hood_details(request, hood_id):
     hood = NeighborHood.objects.get(id=hood_id)
     business = Business.objects.filter(neighbourhood=hood)
@@ -76,6 +79,7 @@ def hood_members(request, neighborhood_id):
     return render(request, 'z_neighborhood/hood_members.html', {'members': members})
 
 
+@login_required(login_url='/accounts/login/')
 def create_post(request, hood_id):
     hood = NeighborHood.objects.get(id=hood_id)
     if request.method == 'POST':
@@ -95,10 +99,12 @@ def create_post(request, hood_id):
     return render(request, 'z_neighborhood/create_post.html', params)
 
 
+@login_required(login_url='/accounts/login/')
 def profile(request, username):
     return render(request, 'z_neighborhood/profile.html')
 
 
+@login_required(login_url='/accounts/login/')
 def edit_profile(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
@@ -126,6 +132,7 @@ def search_business(request):
         return render(request, 'z_neighborhood/search.html', {'message': message})
 
 
+@login_required(login_url='/accounts/login/')
 def join_hood(request, id):
     neighbourhood = get_object_or_404(NeighborHood, id=id)
     request.user.userprofile.neighbourhood = neighbourhood
@@ -133,6 +140,7 @@ def join_hood(request, id):
     return redirect('neighborhood')
 
 
+@login_required(login_url='/accounts/login/')
 def leave_hood(request, id):
     hood = get_object_or_404(NeighborHood, id=id)
     request.user.userprofile.neighbourhood = None
@@ -140,6 +148,7 @@ def leave_hood(request, id):
     return redirect('neighborhood')
 
 
+@login_required(login_url='/accounts/login/')
 def hood_business(request, neighborhood_id):
     businesses = Business.objects.filter(neighbourhood=neighborhood_id)
     return render(request, 'z_neighborhood/hood_business.html', {'businesses': businesses})
