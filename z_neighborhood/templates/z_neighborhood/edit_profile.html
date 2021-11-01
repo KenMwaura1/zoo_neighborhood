@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="container bg-white edit-profile" style="margin-top:10% ">
+        <div class="row card card-cascade narrower" style="padding: 6%">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 view view-cascade blue-gradient white-text">
+                <h3 class="text-center h3" style="margin-top: 4%">Update Profile</h3>
+                <form action="" method="post" novalidate enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button class="btn btn-sm rounded-pill aqua-gradient"> Update</button>
+                </form>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+{% endblock %}
