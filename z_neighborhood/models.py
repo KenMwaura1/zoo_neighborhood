@@ -41,7 +41,8 @@ class NeighborHood(models.Model):
 
     @classmethod
     def get_all_neighborhoods(cls):
-        return cls.objects.all()
+        all_neighborhoods = cls.objects.all()
+        return all_neighborhoods[::-1]
 
     @classmethod
     def get_neighborhood_by_name(cls, name):
