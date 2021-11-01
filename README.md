@@ -6,6 +6,23 @@ A Django web application that allows you to be in the loop about everything happ
 
 ![logo](static/images/Zoo-NeighBourHood.gif)
 
+## Overall Description
+### Project perspective
+If you are like me, You really don’t know what is happening in your neighborhood most of the time. What if an important meeting happens, theft or even death wouldn’t you like to know about it.
+
+Your Job is to create a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
+
+## User stories
+As a user I would like to:
+
+1. Sign in with the application to start using.
+2. Set up a profile about me and a general location and my neighborhood name.
+3. Find a list of different businesses in my neighborhood.
+4. Find Contact Information for the health department and Police authorities near my neighborhood.
+5. Create Posts that will be visible to everyone in my neighborhood.
+6. Change My neighborhood when I decide to move out.
+7. Only view details of a single neighborhood.
+
 
 ## Live Site
 
