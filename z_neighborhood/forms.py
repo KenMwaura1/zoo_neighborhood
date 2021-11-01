@@ -68,3 +68,17 @@ class UpdateNeighbourhoodForm(forms.ModelForm):
         }
 
 
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('user', 'neighbourhood')
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Business Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Business Email'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Business Location'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Business Phone Number'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Business Description'}),
+            'business_logo': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Business Image'}),
+        }
+
+
