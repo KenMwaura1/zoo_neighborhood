@@ -1,4 +1,7 @@
 # zoo_neighborhood
+
+[![Z-neighBourHood](https://github.com/KenMwaura1/zoo_neighborhood/actions/workflows/pythonpackage.yml/badge.svg)](https://github.com/KenMwaura1/zoo_neighborhood/actions/workflows/pythonpackage.yml)
+
 A Django web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
 
 
